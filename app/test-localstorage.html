@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test localStorage</title>
+</head>
+<body>
+    <h1>Test localStorage</h1>
+    <button onclick="testStorage()">Test</button>
+    <div id="result"></div>
+    <script>
+        function testStorage() {
+            try {
+                localStorage.setItem('test', 'value');
+                const value = localStorage.getItem('test');
+                document.getElementById('result').innerHTML = 'localStorage works: ' + value;
+                console.log('localStorage test:', value);
+            } catch (e) {
+                document.getElementById('result').innerHTML = 'localStorage error: ' + e.message;
+                console.error('localStorage error:', e);
+            }
+        }
+    </script>
+</body>
+</html>
