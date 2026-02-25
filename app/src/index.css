@@ -34,15 +34,18 @@
   }
 
   body {
-    @apply bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text;
-    @apply min-h-screen antialiased;
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
-    @apply font-bold;
+    font-weight: 700;
   }
 }
 
@@ -60,11 +63,21 @@
   }
 
   .hover-lift {
-    @apply transition-transform duration-200 hover:scale-105;
+    transition-property: transform;
+    transition-duration: 200ms;
+  }
+
+  .hover-lift:hover {
+    transform: scale(1.05);
   }
 
   .glass-effect {
-    @apply bg-white/80 dark:bg-dark-card/80 backdrop-blur-lg;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+  }
+
+  .dark .glass-effect {
+    background-color: rgba(var(--color-card), 0.8);
   }
 }
 
@@ -75,23 +88,30 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-light-bg dark:bg-dark-bg;
+  background-color: rgb(var(--color-bg));
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-light-muted/50 dark:bg-dark-muted/50 rounded-full;
+  background-color: rgba(var(--color-muted), 0.5);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-light-muted dark:bg-dark-muted;
+  background-color: rgb(var(--color-muted));
 }
 
 /* Selection */
 ::selection {
-  @apply bg-brazil-green/20 text-brazil-green-dark dark:bg-brazil-green/30;
+  background-color: rgba(0, 155, 58, 0.2);
+  color: #006837;
+}
+
+.dark ::selection {
+  background-color: rgba(0, 155, 58, 0.3);
 }
 
 /* Focus visible */
 :focus-visible {
-  @apply outline-none ring-2 ring-brazil-green ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(var(--color-bg)), 0 0 0 4px #009B3A;
 }

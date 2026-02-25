@@ -36,7 +36,9 @@ export async function fetchSenadores(): Promise<Parlamentar[]> {
 
     const senadores = data.ListaParlamentarEmExercicio?.Parlamentares?.Parlamentar || []
 
-    return senadores.map(senador => normalizarSenador(senador))
+    return senadores
+      .map(senador => normalizarSenador(senador))
+      .filter((parlamentar): parlamentar is Parlamentar => parlamentar !== null)
   } catch (error) {
     console.error('Erro ao buscar senadores:', error)
     throw error
@@ -64,7 +66,13 @@ export async function fetchSenador(codigo: string): Promise<Parlamentar> {
       throw new Error('Senador não encontrado')
     }
 
-    return normalizarSenador(senador as SenadorDetalhado)
+    const parlamentar = normalizarSenador(senador as SenadorDetalhado)
+
+    if (!parlamentar) {
+      throw new Error('Dados do senador inválidos')
+    }
+
+    return parlamentar
   } catch (error) {
     console.error(`Erro ao buscar senador ${codigo}:`, error)
     throw error

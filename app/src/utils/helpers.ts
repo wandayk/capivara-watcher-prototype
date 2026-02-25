@@ -33,7 +33,13 @@ export function normalizarDeputado(deputado: Deputado | DeputadoDetalhado): Parl
 /**
  * Normaliza dados de senador para o formato Parlamentar unificado
  */
-export function normalizarSenador(senador: Senador | SenadorDetalhado): Parlamentar {
+export function normalizarSenador(senador: Senador | SenadorDetalhado): Parlamentar | null {
+  // Validação de campos obrigatórios
+  if (!senador.CodigoParlamentar || !senador.NomeParlamentar) {
+    console.warn('Senador com dados inválidos:', senador)
+    return null
+  }
+
   const isDetalhado = 'SexoParlamentar' in senador
 
   return {
@@ -42,9 +48,9 @@ export function normalizarSenador(senador: Senador | SenadorDetalhado): Parlamen
     codigoExterno: senador.CodigoParlamentar,
     nome: senador.NomeParlamentar,
     nomeCivil: senador.NomeCompleto,
-    partido: senador.SiglaPartido,
-    uf: senador.UfParlamentar,
-    foto: senador.UrlFoto,
+    partido: senador.SiglaPartido || 'S/P',
+    uf: senador.UfParlamentar || 'BR',
+    foto: senador.UrlFoto || '',
     email: senador.Email,
     telefone: isDetalhado ? (senador as SenadorDetalhado).Telefone : undefined,
     sexo: isDetalhado ? (senador as SenadorDetalhado).SexoParlamentar : undefined,
@@ -188,14 +194,16 @@ export function truncarTexto(texto: string, maxLength: number): string {
 /**
  * Obtém iniciais de um nome
  */
-export function obterIniciais(nome: string): string {
+export function obterIniciais(nome: string | undefined): string {
+  if (!nome) return '??'
+
   return nome
     .split(' ')
     .filter(palavra => palavra.length > 2) // Ignora preposições
     .slice(0, 2)
     .map(palavra => palavra[0])
     .join('')
-    .toUpperCase()
+    .toUpperCase() || '??'
 }
 
 /**
