@@ -73,16 +73,62 @@ A aplicação utiliza autenticação **mockada** (sem backend real).
 
 Você também pode criar novas contas através da tela de registro.
 
-## 🎨 Features
+## ✨ Features Implementadas
 
-- ✅ Autenticação mockada com persistência
-- ✅ Tema claro/escuro
-- ✅ Mapa interativo do Brasil
-- ✅ Busca e filtro de parlamentares
-- ✅ Visualização de dados detalhados
-- ✅ Gráficos de despesas
-- ✅ Interface responsiva
-- ✅ Animações suaves
+### Autenticação
+- ✅ Login com credenciais mockadas (pucminas/pucminas)
+- ✅ Criar nova conta com validação
+- ✅ Trocar senha
+- ✅ Persistência em localStorage
+- ✅ Proteção de rotas privadas
+- ✅ Logout funcional
+
+### Interface
+- ✅ Tema claro/escuro com persistência
+- ✅ Design responsivo (mobile, tablet, desktop)
+- ✅ Animações suaves com Framer Motion
+- ✅ Sidebar lateral com lista de parlamentares
+- ✅ Loading states em todas as operações
+- ✅ Mensagens de erro amigáveis
+
+### Mapa Interativo
+- ✅ Mapa do Brasil organizado por região
+- ✅ 27 estados clicáveis
+- ✅ Cores por região
+- ✅ Tooltip com informações ao hover
+- ✅ Seleção de estado para filtrar busca
+
+### Busca de Parlamentares
+- ✅ Busca por nome com debounce
+- ✅ Filtro por tipo (Deputado/Senador/Todos)
+- ✅ Filtro por partido
+- ✅ Filtro por UF (via mapa)
+- ✅ Integração simultânea com APIs da Câmara e Senado
+- ✅ Exibição de até 50 resultados
+- ✅ Loading spinner durante busca
+
+### Gerenciamento de Parlamentares
+- ✅ Adicionar parlamentar à lista pessoal
+- ✅ Remover parlamentar com confirmação
+- ✅ Seleção automática ao adicionar
+- ✅ Persistência por usuário
+- ✅ Badge "Adicionado" em cards já salvos
+
+### Visualização de Dados
+- ✅ Detalhes completos do parlamentar
+- ✅ Informações de contato (email, telefone)
+- ✅ Dados pessoais (nascimento, naturalidade, escolaridade)
+- ✅ Informações do mandato
+- ✅ Link para perfil oficial
+- ✅ Cores dos partidos
+
+### Design System
+- ✅ Componentes reutilizáveis (Button, Input, Card, Avatar)
+- ✅ Logo institucional
+- ✅ Cores brasileiras (verde, amarelo, azul)
+- ✅ Tipografia elegante (DM Sans + Playfair Display)
+- ✅ Ícones Lucide React
+- ✅ Scrollbar customizada
 
 ## 📁 Estrutura do Projeto
 

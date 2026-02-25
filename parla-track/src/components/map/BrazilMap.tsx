@@ -45,7 +45,7 @@ export function BrazilMap({ selectedUF, onSelectUF }: BrazilMapProps) {
 
     // Color by region
     const regiao = Object.entries(REGIOES).find(([_, data]) =>
-      data.estados.includes(sigla)
+      (data.estados as readonly string[]).includes(sigla)
     )
 
     return regiao ? regiao[1].cor : '#808080'
