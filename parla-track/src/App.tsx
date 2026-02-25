@@ -1,28 +1,57 @@
-import { ThemeToggle } from './components/common/ThemeToggle'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './hooks/useAuth'
+import { ROUTES } from './utils/constants'
+import { ProtectedRoute } from './components/common/ProtectedRoute'
+
+// Pages
+import { Login } from './pages/Login'
+import { CreateAccount } from './pages/CreateAccount'
+import { ChangePassword } from './pages/ChangePassword'
+import { Redirecting } from './pages/Redirecting'
+import { Home } from './pages/Home'
+import { AddParlamentar } from './pages/AddParlamentar'
+
+function LogoutHandler() {
+  const { logout } = useAuth()
+  logout()
+  return <Navigate to={ROUTES.login} replace />
+}
 
 function App() {
   return (
-    <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <div className="flex justify-end mb-8">
-            <ThemeToggle />
-          </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Public Routes */}
+        <Route path={ROUTES.login} element={<Login />} />
+        <Route path={ROUTES.createAccount} element={<CreateAccount />} />
+        <Route path={ROUTES.changePassword} element={<ChangePassword />} />
+        <Route path={ROUTES.redirecting} element={<Redirecting />} />
 
-          <h1 className="text-5xl font-display mb-4 text-brazil-green">
-            ParlaTrack
-          </h1>
-          <p className="text-xl text-light-muted dark:text-dark-muted">
-            Acompanhe parlamentares brasileiros
-          </p>
-          <div className="mt-8">
-            <p className="text-sm">
-              Aplicação em construção... 🚧
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+        {/* Protected Routes */}
+        <Route
+          path={ROUTES.home}
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.add}
+          element={
+            <ProtectedRoute>
+              <AddParlamentar />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Logout Route */}
+        <Route path={ROUTES.logout} element={<LogoutHandler />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to={ROUTES.login} replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
