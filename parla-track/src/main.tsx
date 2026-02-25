@@ -4,12 +4,15 @@ import './index.css'
 import App from './App.tsx'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { AuthProvider } from './contexts/AuthContext'
+import { ParlamentarProvider } from './contexts/ParlamentarContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
       <AuthProvider>
-        <App />
+        <ParlamentarProvider>
+          <App />
+        </ParlamentarProvider>
       </AuthProvider>
     </ThemeProvider>
   </StrictMode>,
