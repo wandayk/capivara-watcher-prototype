@@ -26,7 +26,15 @@ export default {
             light: '#003D99',
           },
         },
-        // Dark mode
+        // Cores dinâmicas usando CSS variables (mudam com o tema)
+        bg: 'rgb(var(--color-bg) / <alpha-value>)',
+        card: 'rgb(var(--color-card) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
+        text: 'rgb(var(--color-text) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        // Dark mode (valores estáticos para fallback)
         dark: {
           bg: '#0f1117',
           card: '#1a1d26',
@@ -34,7 +42,7 @@ export default {
           text: '#e8e9ed',
           muted: '#9ca3af',
         },
-        // Light mode
+        // Light mode (valores estáticos para fallback)
         light: {
           bg: '#f8f7f4',
           card: '#ffffff',
@@ -42,12 +50,6 @@ export default {
           text: '#1a1d26',
           muted: '#6b7280',
         },
-        // Accent colors
-        accent: {
-          gold: '#D4AF37',
-          silver: '#C0C0C0',
-          bronze: '#CD7F32',
-        }
       },
       fontFamily: {
         sans: ['DM Sans', 'system-ui', 'sans-serif'],

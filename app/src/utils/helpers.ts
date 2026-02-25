@@ -34,32 +34,46 @@ export function normalizarDeputado(deputado: Deputado | DeputadoDetalhado): Parl
  * Normaliza dados de senador para o formato Parlamentar unificado
  */
 export function normalizarSenador(senador: Senador | SenadorDetalhado): Parlamentar | null {
+  // A API do Senado pode retornar dados em estrutura aninhada
+  const identificacao = senador.IdentificacaoParlamentar
+
+  // Extrai valores da estrutura aninhada ou direta
+  const codigoParlamentar = identificacao?.CodigoParlamentar || senador.CodigoParlamentar
+  const nomeParlamentar = identificacao?.NomeParlamentar || senador.NomeParlamentar
+  const nomeCompleto = identificacao?.NomeCompletoParlamentar || senador.NomeCompleto
+  const siglaPartido = identificacao?.SiglaPartidoParlamentar || senador.SiglaPartido
+  const ufParlamentar = identificacao?.UfParlamentar || senador.UfParlamentar
+  const urlFoto = identificacao?.UrlFotoParlamentar || senador.UrlFoto
+  const urlPagina = identificacao?.UrlPaginaParlamentar || senador.UrlPagina
+  const email = identificacao?.EmailParlamentar || senador.Email
+  const sexo = identificacao?.SexoParlamentar || (senador as SenadorDetalhado).SexoParlamentar
+
   // Validação de campos obrigatórios
-  if (!senador.CodigoParlamentar || !senador.NomeParlamentar) {
+  if (!codigoParlamentar || !nomeParlamentar) {
     console.warn('Senador com dados inválidos:', senador)
     return null
   }
 
-  const isDetalhado = 'SexoParlamentar' in senador
+  const isDetalhado = 'SexoParlamentar' in senador || 'DataNascimento' in senador
 
   return {
-    id: `senador-${senador.CodigoParlamentar}`,
+    id: `senador-${codigoParlamentar}`,
     tipo: 'senador',
-    codigoExterno: senador.CodigoParlamentar,
-    nome: senador.NomeParlamentar,
-    nomeCivil: senador.NomeCompleto,
-    partido: senador.SiglaPartido || 'S/P',
-    uf: senador.UfParlamentar || 'BR',
-    foto: senador.UrlFoto || '',
-    email: senador.Email,
+    codigoExterno: codigoParlamentar,
+    nome: nomeParlamentar,
+    nomeCivil: nomeCompleto,
+    partido: siglaPartido || 'S/P',
+    uf: ufParlamentar || 'BR',
+    foto: urlFoto || '',
+    email: email,
     telefone: isDetalhado ? (senador as SenadorDetalhado).Telefone : undefined,
-    sexo: isDetalhado ? (senador as SenadorDetalhado).SexoParlamentar : undefined,
+    sexo: sexo,
     dataNascimento: isDetalhado ? (senador as SenadorDetalhado).DataNascimento : undefined,
     ufNascimento: isDetalhado ? (senador as SenadorDetalhado).UfNascimento : undefined,
     municipioNascimento: isDetalhado ? (senador as SenadorDetalhado).Naturalidade : undefined,
     escolaridade: isDetalhado ? (senador as SenadorDetalhado).FormacaoAcademica : undefined,
     situacao: isDetalhado ? (senador as SenadorDetalhado).Situacao : undefined,
-    url: senador.UrlPagina,
+    url: urlPagina,
     dadosOriginais: senador,
   }
 }

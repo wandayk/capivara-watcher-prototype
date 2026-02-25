@@ -47,24 +47,37 @@ export interface DeputadoDetalhado extends Deputado {
 }
 
 export interface Senador {
-  CodigoParlamentar: string
-  NomeParlamentar: string
-  NomeCompleto: string
-  SiglaPartido: string
-  UfParlamentar: string
-  UrlFoto: string
-  UrlPagina: string
+  CodigoParlamentar?: string
+  NomeParlamentar?: string
+  NomeCompleto?: string
+  SiglaPartido?: string
+  UfParlamentar?: string
+  UrlFoto?: string
+  UrlPagina?: string
   Email?: string
+  // Estrutura aninhada da API do Senado
+  IdentificacaoParlamentar?: {
+    CodigoParlamentar: string
+    NomeParlamentar: string
+    NomeCompletoParlamentar: string
+    SiglaPartidoParlamentar: string
+    UfParlamentar: string
+    UrlFotoParlamentar: string
+    UrlPaginaParlamentar: string
+    EmailParlamentar?: string
+    SexoParlamentar?: string
+  }
+  Mandato?: any
 }
 
 export interface SenadorDetalhado extends Senador {
-  SexoParlamentar: string
-  DataNascimento: string
-  UfNascimento: string
-  Naturalidade: string
+  SexoParlamentar?: string
+  DataNascimento?: string
+  UfNascimento?: string
+  Naturalidade?: string
   Telefone?: string
   FormacaoAcademica?: string
-  Situacao: string
+  Situacao?: string
 }
 
 // Tipo unificado para uso na aplicação
