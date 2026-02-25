@@ -1,0 +1,31 @@
+{
+  "name": "capivara-watcher-prototype",
+  "version": "1.0.0",
+  "description": "A file system watcher prototype",
+  "main": "src/index.js",
+  "bin": {
+    "capivara-watcher": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wandayk/capivara-watcher-prototype.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wandayk/capivara-watcher-prototype/issues"
+  },
+  "homepage": "https://github.com/wandayk/capivara-watcher-prototype#readme",
+  "dependencies": {
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
