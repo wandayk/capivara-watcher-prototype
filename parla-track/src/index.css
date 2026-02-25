@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 248 247 244;
+    --color-card: 255 255 255;
+    --color-border: 229 229 229;
+    --color-text: 26 29 38;
+    --color-muted: 107 114 128;
+    --color-primary: 0 155 58;
+    --color-accent: 212 175 55;
+  }
+
+  .dark {
+    --color-bg: 15 17 23;
+    --color-card: 26 29 38;
+    --color-border: 42 45 54;
+    --color-text: 232 233 237;
+    --color-muted: 156 163 175;
+    --color-primary: 0 155 58;
+    --color-accent: 212 175 55;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text;
+    @apply min-h-screen antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply font-bold;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 dark:bg-dark-card/80 backdrop-blur-lg;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light-bg dark:bg-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-light-muted/50 dark:bg-dark-muted/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-light-muted dark:bg-dark-muted;
+}
+
+/* Selection */
+::selection {
+  @apply bg-brazil-green/20 text-brazil-green-dark dark:bg-brazil-green/30;
+}
+
+/* Focus visible */
+:focus-visible {
+  @apply outline-none ring-2 ring-brazil-green ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
+}
