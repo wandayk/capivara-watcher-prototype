@@ -1,9 +1,9 @@
 import { Check, Plus } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Parlamentar } from '../../types'
-import { Avatar } from '../ui/Avatar'
-import { Button } from '../ui/Button'
-import { Card } from '../ui/Card'
+import { Avatar } from '@/components/ui/AvatarWithImage'
+import { Button } from '@/components/ui/ButtonCompat'
+import { Card } from '@/components/ui/CardWithPadding'
 import { PARTIDO_CORES } from '../../utils/constants'
 import { obterIniciais } from '../../utils/helpers'
 

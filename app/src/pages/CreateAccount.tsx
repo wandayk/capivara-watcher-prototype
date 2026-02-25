@@ -6,10 +6,9 @@ import { useAuth } from '../hooks/useAuth'
 import { ROUTES } from '../utils/constants'
 import { validarEmail, validarSenha } from '../utils/helpers'
 import { Logo } from '../components/common/Logo'
-import { ThemeToggle } from '../components/common/ThemeToggle'
-import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/Button'
-import { Card } from '../components/ui/Card'
+import { Input } from '@/components/ui/InputWithIcon'
+import { Button } from '@/components/ui/ButtonCompat'
+import { Card } from '@/components/ui/CardWithPadding'
 
 export function CreateAccount() {
   const navigate = useNavigate()
@@ -132,11 +131,6 @@ export function CreateAccount() {
         <div className="absolute inset-0" style={{
           backgroundImage: `repeating-linear-gradient(45deg, #009B3A 0, #009B3A 1px, transparent 1px, transparent 20px)`
         }} />
-      </div>
-
-      {/* Theme Toggle */}
-      <div className="absolute top-4 right-4 z-10">
-        <ThemeToggle />
       </div>
 
       <motion.div

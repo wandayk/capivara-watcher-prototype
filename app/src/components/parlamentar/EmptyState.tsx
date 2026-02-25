@@ -1,7 +1,7 @@
 import { Search, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Button } from '../ui/Button'
+import { Button } from '@/components/ui/ButtonCompat'
 import { ROUTES } from '../../utils/constants'
 
 export function EmptyState() {

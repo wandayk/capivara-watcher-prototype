@@ -1,267 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap");
 
-@plugin 'tailwindcss-animate';
-
-@custom-variant dark (&:is(.dark *));
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --color-bg: 248 247 244;
-    --color-card: 255 255 255;
-    --color-border: 229 229 229;
-    --color-text: 26 29 38;
-    --color-muted: 107 114 128;
-    --color-primary: 0 155 58;
-    --color-accent: 212 175 55;
-  }
-
-  .dark {
-    --color-bg: 15 17 23;
-    --color-card: 26 29 38;
-    --color-border: 42 45 54;
-    --color-text: 232 233 237;
-    --color-muted: 156 163 175;
-    --color-primary: 0 155 58;
-    --color-accent: 212 175 55;
-  }
-
-  * {
-    border-color: rgb(var(--color-border) / 1);
-  }
-
-  html {
-    font-family: 'DM Sans', system-ui, sans-serif;
-  }
-
-  body {
-    background-color: rgb(var(--color-bg));
-    color: rgb(var(--color-text));
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: 0;
-    padding: 0;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 700;
-  }
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  
+  --radius: 0.5rem;
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .animate-in {
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-out;
-  }
-
-  .hover-lift {
-    transition-property: transform;
-    transition-duration: 200ms;
-  }
-
-  .hover-lift:hover {
-    transform: scale(1.05);
-  }
-
-  .glass-effect {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(16px);
-  }
-
-  .dark .glass-effect {
-    background-color: rgba(var(--color-card), 0.8);
-  }
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: rgb(var(--color-bg));
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--color-muted), 0.5);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(var(--color-muted));
-}
-
-/* Selection */
-::selection {
-  background-color: rgba(0, 155, 58, 0.2);
-  color: #006837;
-}
-
-.dark ::selection {
-  background-color: rgba(0, 155, 58, 0.3);
-}
-
-/* Focus visible */
-:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px rgb(var(--color-bg)), 0 0 0 4px #009B3A;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes scaleUp {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
 }
 
 :root {
-  --radius: 0.75rem;
-  /* Cores com tema do Brasil - Light mode */
-  --background: 248 247 244; /* #f8f7f4 - off-white */
-  --foreground: 26 29 38; /* #1a1d26 - texto escuro */
-  --card: 255 255 255; /* branco puro */
-  --card-foreground: 26 29 38;
-  --popover: 255 255 255;
-  --popover-foreground: 26 29 38;
-  --primary: 0 155 58; /* #009B3A - verde Brasil */
-  --primary-foreground: 255 255 255;
-  --secondary: 254 223 0; /* #FEDF00 - amarelo Brasil */
-  --secondary-foreground: 0 39 118; /* #002776 - azul Brasil */
-  --muted: 229 229 229;
-  --muted-foreground: 107 114 128;
-  --accent: 212 175 55; /* #D4AF37 - dourado */
-  --accent-foreground: 26 29 38;
-  --destructive: 239 68 68;
-  --destructive-foreground: 255 255 255;
-  --border: 229 229 229;
-  --input: 229 229 229;
-  --ring: 0 155 58; /* verde Brasil */
-  --chart-1: 0 155 58; /* verde */
-  --chart-2: 254 223 0; /* amarelo */
-  --chart-3: 0 39 118; /* azul */
-  --chart-4: 212 175 55; /* dourado */
-  --chart-5: 107 114 128; /* cinza */
-  --sidebar: 255 255 255;
-  --sidebar-foreground: 26 29 38;
-  --sidebar-primary: 0 155 58;
-  --sidebar-primary-foreground: 255 255 255;
-  --sidebar-accent: 248 247 244;
-  --sidebar-accent-foreground: 26 29 38;
-  --sidebar-border: 229 229 229;
-  --sidebar-ring: 0 155 58;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 142 71% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 142 71% 30%;
 }
 
-.dark {
-  /* Cores com tema do Brasil - Dark mode */
-  --background: 15 17 23; /* #0f1117 - fundo escuro */
-  --foreground: 232 233 237; /* #e8e9ed - texto claro */
-  --card: 26 29 38; /* #1a1d26 - card escuro */
-  --card-foreground: 232 233 237;
-  --popover: 26 29 38;
-  --popover-foreground: 232 233 237;
-  --primary: 0 155 58; /* #009B3A - verde Brasil */
-  --primary-foreground: 255 255 255;
-  --secondary: 254 223 0; /* #FEDF00 - amarelo Brasil */
-  --secondary-foreground: 15 17 23;
-  --muted: 42 45 54;
-  --muted-foreground: 156 163 175;
-  --accent: 212 175 55; /* #D4AF37 - dourado */
-  --accent-foreground: 232 233 237;
-  --destructive: 239 68 68;
-  --destructive-foreground: 255 255 255;
-  --border: 42 45 54;
-  --input: 42 45 54;
-  --ring: 0 191 77; /* verde mais claro no dark */
-  --chart-1: 0 191 77; /* verde claro */
-  --chart-2: 254 223 0; /* amarelo */
-  --chart-3: 0 61 153; /* azul mais claro */
-  --chart-4: 212 175 55; /* dourado */
-  --chart-5: 156 163 175; /* cinza */
-  --sidebar: 26 29 38;
-  --sidebar-foreground: 232 233 237;
-  --sidebar-primary: 0 155 58;
-  --sidebar-primary-foreground: 255 255 255;
-  --sidebar-accent: 42 45 54;
-  --sidebar-accent-foreground: 232 233 237;
-  --sidebar-border: 42 45 54;
-  --sidebar-ring: 0 191 77;
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+}
+
+/* Remove background amarelo do autocomplete */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px hsl(var(--background)) inset !important;
+  -webkit-text-fill-color: hsl(var(--foreground)) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
 }

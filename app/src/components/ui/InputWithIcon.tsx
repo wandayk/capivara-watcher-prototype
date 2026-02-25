@@ -58,3 +58,6 @@ export const InputWithIcon = React.forwardRef<HTMLInputElement, InputWithIconPro
 )
 
 InputWithIcon.displayName = 'InputWithIcon'
+
+// Export as Input for backward compatibility
+export { InputWithIcon as Input }

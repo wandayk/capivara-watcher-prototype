@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useParlamentares } from '../../hooks/useParlamentares'
 import { SidebarHeader } from './SidebarHeader'
 import { SidebarFooter } from './SidebarFooter'
-import { Button } from '../ui/Button'
-import { Avatar } from '../ui/Avatar'
+import { Button } from '@/components/ui/ButtonCompat'
+import { Avatar } from '@/components/ui/AvatarWithImage'
 import { ROUTES, PARTIDO_CORES } from '../../utils/constants'
 import { obterIniciais } from '../../utils/helpers'
 
@@ -56,12 +56,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           x: isOpen ? 0 : -320,
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed left-0 top-0 h-screen w-80 bg-light-card dark:bg-dark-card border-r border-light-border dark:border-dark-border flex flex-col z-50 md:relative md:translate-x-0"
+        className="fixed left-0 top-0 h-screen w-80 bg-white border-r border-light-border flex flex-col z-50 md:relative md:translate-x-0"
       >
         {/* Close button (mobile only) */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-light-bg dark:hover:bg-dark-bg rounded-lg md:hidden"
+          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-lg md:hidden"
         >
           <X className="w-5 h-5" />
         </button>
@@ -86,10 +86,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="flex-1 overflow-y-auto px-4 pb-4">
           {parlamentares.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-sm text-light-muted dark:text-dark-muted">
+              <p className="text-sm text-muted-foreground">
                 Nenhum parlamentar adicionado
               </p>
-              <p className="text-xs text-light-muted dark:text-dark-muted mt-2">
+              <p className="text-xs text-muted-foreground mt-2">
                 Clique no botão acima para adicionar
               </p>
             </div>
@@ -107,7 +107,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                       w-full p-3 rounded-lg text-left transition-all
                       ${isSelected
                         ? 'bg-brazil-green/10 border-2 border-brazil-green'
-                        : 'bg-light-bg dark:bg-dark-bg border-2 border-transparent hover:border-light-border dark:hover:border-dark-border'
+                        : 'bg-gray-50 border-2 border-transparent hover:border-gray-200'
                       }
                     `}
                     whileHover={{ scale: 1.02 }}
@@ -121,7 +121,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                         fallback={obterIniciais(parlamentar.nome)}
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-light-text dark:text-dark-text truncate">
+                        <p className="text-sm font-semibold text-foreground truncate">
                           {parlamentar.nome}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
@@ -129,7 +129,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                             className="w-2 h-2 rounded-full"
                             style={{ backgroundColor: corPartido }}
                           />
-                          <p className="text-xs text-light-muted dark:text-dark-muted">
+                          <p className="text-xs text-muted-foreground">
                             {parlamentar.partido} - {parlamentar.uf}
                           </p>
                         </div>
