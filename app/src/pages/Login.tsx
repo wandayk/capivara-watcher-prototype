@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Lock, User, AlertCircle, Loader2 } from "lucide-react";
+import { Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { ROUTES } from "@/utils/constants";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ export function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ export function Login() {
     e.preventDefault();
     setError("");
 
-    if (!username || !password) {
+    if (!email || !password) {
       setError("Preencha todos os campos");
       return;
     }
@@ -31,7 +31,7 @@ export function Login() {
     setIsLoading(true);
 
     try {
-      const success = await login({ username, password });
+      const success = await login({ username: email, password });
 
       if (success) {
         navigate(`${ROUTES.redirecting}?to=${ROUTES.home}`);
@@ -134,17 +134,17 @@ export function Login() {
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Usuário</Label>
+              <Label htmlFor="email">Email</Label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  id="username"
-                  type="text"
-                  placeholder="Digite seu usuário"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  id="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
-                  autoComplete="username"
+                  autoComplete="email"
                   className="pl-9 h-11"
                 />
               </div>
@@ -222,9 +222,12 @@ export function Login() {
               <span className="font-semibold text-foreground">💡 Teste:</span>{" "}
               Use{" "}
               <code className="px-2 py-0.5 bg-background text-primary rounded font-mono text-xs mx-1">
-                pucminas
+                teste@email.com
               </code>
-              para usuário e senha
+              e senha{" "}
+              <code className="px-2 py-0.5 bg-background text-primary rounded font-mono text-xs mx-1">
+                123456
+              </code>
             </p>
           </div>
         </motion.div>

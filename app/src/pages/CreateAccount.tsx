@@ -1,252 +1,317 @@
-import { useState, FormEvent } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { User, Mail, Lock, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react'
-import { useAuth } from '../hooks/useAuth'
-import { ROUTES } from '../utils/constants'
-import { validarEmail, validarSenha } from '../utils/helpers'
-import { Logo } from '../components/common/Logo'
-import { Input } from '@/components/ui/InputWithIcon'
-import { Button } from '@/components/ui/ButtonCompat'
-import { Card } from '@/components/ui/CardWithPadding'
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Mail, Lock, AlertCircle, CheckCircle, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { ROUTES } from "@/utils/constants";
+import { validarEmail, validarSenha } from "@/utils/helpers";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export function CreateAccount() {
-  const navigate = useNavigate()
-  const { register } = useAuth()
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [isLoading, setIsLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const validate = () => {
-    const newErrors: Record<string, string> = {}
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Nome é obrigatório'
-    }
+    const newErrors: Record<string, string> = {};
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email é obrigatório'
+      newErrors.email = "Email é obrigatório";
     } else if (!validarEmail(formData.email)) {
-      newErrors.email = 'Email inválido'
-    }
-
-    if (!formData.username.trim()) {
-      newErrors.username = 'Usuário é obrigatório'
-    } else if (formData.username.length < 3) {
-      newErrors.username = 'Usuário deve ter pelo menos 3 caracteres'
+      newErrors.email = "Email inválido";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Senha é obrigatória'
+      newErrors.password = "Senha é obrigatória";
     } else if (!validarSenha(formData.password)) {
-      newErrors.password = 'Senha deve ter pelo menos 6 caracteres'
+      newErrors.password = "Senha deve ter pelo menos 6 caracteres";
     }
 
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Confirme a senha'
+      newErrors.confirmPassword = "Confirme a senha";
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'As senhas não coincidem'
+      newErrors.confirmPassword = "As senhas não coincidem";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validate()) return
+    if (!validate()) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const success = await register({
-        name: formData.name,
+        name: formData.email.split("@")[0],
         email: formData.email,
-        username: formData.username,
+        username: formData.email,
         password: formData.password,
-      })
+      });
 
       if (success) {
-        setSuccess(true)
+        setSuccess(true);
         setTimeout(() => {
-          navigate(`${ROUTES.redirecting}?to=${ROUTES.login}`)
-        }, 2000)
+          navigate(`${ROUTES.redirecting}?to=${ROUTES.login}`);
+        }, 2000);
       } else {
-        setErrors({ general: 'Usuário ou email já existe' })
+        setErrors({ general: "Email já cadastrado" });
       }
-    } catch (err) {
-      setErrors({ general: 'Erro ao criar conta. Tente novamente.' })
+    } catch {
+      setErrors({ general: "Erro ao criar conta. Tente novamente." });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-    // Limpa erro do campo ao digitar
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => {
-        const newErrors = { ...prev }
-        delete newErrors[field]
-        return newErrors
-      })
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
-  }
+  };
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-light-bg via-light-bg to-brazil-green/5 dark:from-dark-bg dark:via-dark-bg dark:to-brazil-green/10 flex items-center justify-center px-4">
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full"
+          className="max-w-md w-full p-8 bg-card rounded-lg shadow-lg text-center"
         >
-          <Card padding="lg" className="text-center">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h2 className="text-2xl font-display text-light-text dark:text-dark-text mb-2">
-              Conta criada com sucesso!
-            </h2>
-            <p className="text-light-muted dark:text-dark-muted">
-              Redirecionando para o login...
-            </p>
-          </Card>
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-display text-foreground mb-2">
+            Conta criada com sucesso!
+          </h2>
+          <p className="text-muted-foreground">
+            Redirecionando para o login...
+          </p>
         </motion.div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-light-bg via-light-bg to-brazil-green/5 dark:from-dark-bg dark:via-dark-bg dark:to-brazil-green/10 flex items-center justify-center px-4 py-8">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `repeating-linear-gradient(45deg, #009B3A 0, #009B3A 1px, transparent 1px, transparent 20px)`
-        }} />
-      </div>
+    <div className="h-screen w-screen overflow-hidden flex bg-background relative">
+      {/* Animated Background Gradients */}
+      <div className="absolute inset-0 -z-10" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-full bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
+      <div
+        className="absolute flex items-center bottom-0 right-1/4 w-[500px] h-full bg-primary/15 rounded-full blur-[120px] -z-10 animate-pulse"
+        style={{ animationDelay: "1s" }}
+      />
 
+      {/* Left Side - Video */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full relative z-10"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="w-[70%] flex items-center relative overflow-hidden"
+        style={{ background: "#f9fbfc" }}
       >
-        <Card padding="lg" className="shadow-2xl">
-          {/* Back Button */}
-          <Link
-            to={ROUTES.login}
-            className="inline-flex items-center gap-2 text-sm text-brazil-green hover:text-brazil-green-dark mb-6 transition-colors"
+        {/* Video Background */}
+        {!videoError && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="inset-0 w-full object-cover z-0"
+            style={{ pointerEvents: "none" }}
+            onError={() => {
+              console.error("Erro ao carregar vídeo");
+              setVideoError(true);
+            }}
+            onLoadedData={() => {
+              console.log("Vídeo carregado com sucesso");
+            }}
           >
-            <ArrowLeft className="w-4 h-4" />
-            Voltar para login
-          </Link>
+            <source src="/beach.mp4" type="video/mp4" />
+          </video>
+        )}
 
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <Logo size="md" />
+        {/* Fallback background if video fails */}
+        {videoError && (
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 via-gray-900 to-black z-0">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLDE1NSw1OCwwLjEpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+          </div>
+        )}
+
+        {/* Animated Glow Effect */}
+        <div className="absolute inset-0 animate-pulse opacity-30 z-10" />
+      </motion.div>
+
+      {/* Right Side - Form */}
+      <div className="w-[30%] shadow-lg flex items-center justify-center bg-background relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-sm px-8 relative z-10"
+        >
+          {/* Logo e Slogan */}
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-display font-bold text-foreground mb-1">
+              CAPIVARA
+              <br />
+              WATCHER
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Monitoramento do Congresso Nacional
+            </p>
           </div>
 
-          {/* Title */}
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-display text-light-text dark:text-dark-text mb-2">
+          {/* Divider */}
+          <Separator className="mb-8" />
+
+          {/* Header */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-foreground mb-1">
               Criar Conta
-            </h1>
-            <p className="text-sm text-light-muted dark:text-dark-muted">
+            </h2>
+            <p className="text-xs text-muted-foreground">
               Preencha os dados para começar
             </p>
           </div>
 
           {/* General Error */}
           {errors.general && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mb-6 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-2 text-red-700 dark:text-red-400"
-            >
-              <AlertCircle className="w-5 h-5 flex-shrink-0" />
-              <span className="text-sm">{errors.general}</span>
-            </motion.div>
+            <div className="mb-4 p-3 bg-destructive/10 border border-destructive/30 rounded-md flex items-start gap-2 text-destructive">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span className="text-sm font-medium">{errors.general}</span>
+            </div>
           )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Nome Completo"
-              type="text"
-              placeholder="Digite seu nome"
-              value={formData.name}
-              onChange={(e) => handleChange('name', e.target.value)}
-              leftIcon={<User className="w-5 h-5" />}
-              error={errors.name}
-              disabled={isLoading}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  disabled={isLoading}
+                  autoComplete="email"
+                  className="pl-9 h-11"
+                />
+              </div>
+              {errors.email && (
+                <p className="text-sm text-destructive">{errors.email}</p>
+              )}
+            </div>
 
-            <Input
-              label="Email"
-              type="email"
-              placeholder="seu@email.com"
-              value={formData.email}
-              onChange={(e) => handleChange('email', e.target.value)}
-              leftIcon={<Mail className="w-5 h-5" />}
-              error={errors.email}
-              disabled={isLoading}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="password">Senha</Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Escolha uma senha"
+                  value={formData.password}
+                  onChange={(e) => handleChange("password", e.target.value)}
+                  disabled={isLoading}
+                  autoComplete="new-password"
+                  className="pl-9 h-11"
+                />
+              </div>
+              {errors.password && (
+                <p className="text-sm text-destructive">{errors.password}</p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Mínimo 6 caracteres
+              </p>
+            </div>
 
-            <Input
-              label="Usuário"
-              type="text"
-              placeholder="Escolha um usuário"
-              value={formData.username}
-              onChange={(e) => handleChange('username', e.target.value)}
-              leftIcon={<User className="w-5 h-5" />}
-              error={errors.username}
-              helperText="Mínimo 3 caracteres"
-              disabled={isLoading}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Digite a senha novamente"
+                  value={formData.confirmPassword}
+                  onChange={(e) =>
+                    handleChange("confirmPassword", e.target.value)
+                  }
+                  disabled={isLoading}
+                  autoComplete="new-password"
+                  className="pl-9 h-11"
+                />
+              </div>
+              {errors.confirmPassword && (
+                <p className="text-sm text-destructive">
+                  {errors.confirmPassword}
+                </p>
+              )}
+            </div>
 
-            <Input
-              label="Senha"
-              type="password"
-              placeholder="Escolha uma senha"
-              value={formData.password}
-              onChange={(e) => handleChange('password', e.target.value)}
-              leftIcon={<Lock className="w-5 h-5" />}
-              error={errors.password}
-              helperText="Mínimo 6 caracteres"
-              disabled={isLoading}
-            />
-
-            <Input
-              label="Confirmar Senha"
-              type="password"
-              placeholder="Digite a senha novamente"
-              value={formData.confirmPassword}
-              onChange={(e) => handleChange('confirmPassword', e.target.value)}
-              leftIcon={<Lock className="w-5 h-5" />}
-              error={errors.confirmPassword}
-              disabled={isLoading}
-            />
-
+            {/* Submit Button */}
             <Button
               type="submit"
-              variant="primary"
-              size="lg"
-              fullWidth
-              isLoading={isLoading}
+              className="w-full h-12 text-sm shadow-md font-semibold transition-all bg-green-600/70 text-white"
+              size="default"
+              disabled={isLoading}
             >
-              Criar Conta
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                  Criando conta...
+                </>
+              ) : (
+                "Criar Conta"
+              )}
             </Button>
           </form>
-        </Card>
-      </motion.div>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <Separator />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="px-3 text-xs text-muted-foreground bg-background">
+                Já tem conta?
+              </span>
+            </div>
+          </div>
+
+          {/* Login Link */}
+          <div className="text-center">
+            <Button
+              type="button"
+              className="w-full h-10 text-sm font-medium shadow-md border border-border"
+              variant="outline"
+              onClick={() => navigate(ROUTES.login)}
+            >
+              Voltar para login
+            </Button>
+          </div>
+        </motion.div>
+      </div>
     </div>
-  )
+  );
 }

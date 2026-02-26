@@ -1,21 +1,21 @@
-import { LogOut } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
-import { Avatar } from '@/components/ui/AvatarWithImage'
-import { Button } from '@/components/ui/ButtonCompat'
-import { ROUTES } from '../../utils/constants'
-import { obterIniciais } from '../../utils/helpers'
+import { LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { Avatar } from "@/components/ui/AvatarWithImage";
+import { Button } from "@/components/ui/ButtonCompat";
+import { ROUTES } from "../../utils/constants";
+import { obterIniciais } from "../../utils/helpers";
 
 export function SidebarFooter() {
-  const { user, logout } = useAuth()
-  const navigate = useNavigate()
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    navigate(ROUTES.login)
-  }
+    logout();
+    navigate(ROUTES.login);
+  };
 
-  if (!user) return null
+  if (!user) return null;
 
   return (
     <div className="p-4 border-t border-light-border space-y-3">
@@ -51,5 +51,5 @@ export function SidebarFooter() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

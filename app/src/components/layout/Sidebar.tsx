@@ -1,38 +1,39 @@
-import { Plus, X } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useParlamentares } from '../../hooks/useParlamentares'
-import { SidebarHeader } from './SidebarHeader'
-import { SidebarFooter } from './SidebarFooter'
-import { Button } from '@/components/ui/ButtonCompat'
-import { Avatar } from '@/components/ui/AvatarWithImage'
-import { ROUTES, PARTIDO_CORES } from '../../utils/constants'
-import { obterIniciais } from '../../utils/helpers'
+import { Plus, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useParlamentares } from "../../hooks/useParlamentares";
+import { SidebarHeader } from "./SidebarHeader";
+import { SidebarFooter } from "./SidebarFooter";
+import { Button } from "@/components/ui/ButtonCompat";
+import { Avatar } from "@/components/ui/AvatarWithImage";
+import { ROUTES, PARTIDO_CORES } from "../../utils/constants";
+import { obterIniciais } from "../../utils/helpers";
 
 interface SidebarProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const navigate = useNavigate()
-  const { parlamentares, selectedParlamentar, selectParlamentar } = useParlamentares()
+  const navigate = useNavigate();
+  const { parlamentares, selectedParlamentar, selectParlamentar } =
+    useParlamentares();
 
   const handleSelectParlamentar = (parlamentar: typeof selectedParlamentar) => {
-    selectParlamentar(parlamentar)
+    selectParlamentar(parlamentar);
     // Fecha sidebar em mobile
     if (window.innerWidth < 768) {
-      onClose()
+      onClose();
     }
-  }
+  };
 
   const handleAddClick = () => {
-    navigate(ROUTES.add)
+    navigate(ROUTES.add);
     // Fecha sidebar em mobile
     if (window.innerWidth < 768) {
-      onClose()
+      onClose();
     }
-  }
+  };
 
   return (
     <>
@@ -55,7 +56,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         animate={{
           x: isOpen ? 0 : -320,
         }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="fixed left-0 top-0 h-screen w-80 bg-white border-r border-light-border flex flex-col z-50 md:relative md:translate-x-0"
       >
         {/* Close button (mobile only) */}
@@ -96,8 +97,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           ) : (
             <div className="space-y-2">
               {parlamentares.map((parlamentar) => {
-                const isSelected = selectedParlamentar?.id === parlamentar.id
-                const corPartido = PARTIDO_CORES[parlamentar.partido] || '#808080'
+                const isSelected = selectedParlamentar?.id === parlamentar.id;
+                const corPartido =
+                  PARTIDO_CORES[parlamentar.partido] || "#808080";
 
                 return (
                   <motion.button
@@ -105,9 +107,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     onClick={() => handleSelectParlamentar(parlamentar)}
                     className={`
                       w-full p-3 rounded-lg text-left transition-all
-                      ${isSelected
-                        ? 'bg-brazil-green/10 border-2 border-brazil-green'
-                        : 'bg-gray-50 border-2 border-transparent hover:border-gray-200'
+                      ${
+                        isSelected
+                          ? "bg-brazil-green/10 border-2 border-brazil-green"
+                          : "bg-gray-50 border-2 border-transparent hover:border-gray-200"
                       }
                     `}
                     whileHover={{ scale: 1.02 }}
@@ -136,7 +139,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                       </div>
                     </div>
                   </motion.button>
-                )
+                );
               })}
             </div>
           )}
@@ -146,5 +149,5 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <SidebarFooter />
       </motion.aside>
     </>
-  )
+  );
 }
