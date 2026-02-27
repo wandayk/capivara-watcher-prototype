@@ -144,7 +144,7 @@ export function ChangePassword() {
               console.log("Vídeo carregado com sucesso");
             }}
           >
-            <source src={`${import.meta.env.BASE_URL}beach.mp4`} type="video/mp4" />
+            <source src="/capivara-watcher-prototype/beach.mp4" type="video/mp4" />
           </video>
         )}
 

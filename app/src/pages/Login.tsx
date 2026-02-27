@@ -82,7 +82,7 @@ export function Login() {
               console.log("Vídeo carregado com sucesso");
             }}
           >
-            <source src={`${import.meta.env.BASE_URL}login.mp4`} type="video/mp4" />
+            <source src="/capivara-watcher-prototype/login.mp4" type="video/mp4" />
           </video>
         )}
 
