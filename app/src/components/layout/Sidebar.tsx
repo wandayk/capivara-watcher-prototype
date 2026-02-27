@@ -1,4 +1,4 @@
-import { Plus, X } from "lucide-react";
+import { Plus, X, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParlamentares } from "../../hooks/useParlamentares";
@@ -83,14 +83,26 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Parlamentares List */}
         <div className="flex-1 overflow-y-auto px-4 pb-4">
           {parlamentares.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-sm text-muted-foreground">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-center justify-center py-12 px-4"
+            >
+              <div className="w-20 h-20 rounded-full bg-gray-400/20 flex items-center justify-center mb-4">
+                <Users className="w-10 h-10 text-brazil-green/60" />
+              </div>
+              <h3 className="text-base text-center font-semibold text-foreground mb-2">
                 Nenhum parlamentar adicionado
+              </h3>
+              <p className="text-sm text-muted-foreground text-center mb-4">
+                Comece adicionando parlamentares para acompanhar suas atividades
               </p>
-              <p className="text-xs text-muted-foreground mt-2">
-                Clique no botão acima para adicionar
-              </p>
-            </div>
+              <div className="flex items-center gap-2 text-xs text-brazil-green bg-brazil-green/10 px-3 py-2 rounded-lg">
+                <Plus className="w-4 h-4" />
+                <span>Use o botão verde acima</span>
+              </div>
+            </motion.div>
           ) : (
             <div className="space-y-2">
               {parlamentares.map((parlamentar) => {
