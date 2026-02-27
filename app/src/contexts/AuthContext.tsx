@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { User } from '../types'
 import { DEFAULT_USER, STORAGE_KEYS } from '../utils/constants'
-import { gerarId, lerLocalStorage, removerLocalStorage, salvarLocalStorage } from '../utils/helpers'
+import { gerarId, lerLocalStorage, salvarLocalStorage } from '../utils/helpers'
+import { getCookieObject, setCookieObject, removeCookie } from '../utils/cookies'
 
 interface UserCredentials {
   username: string
@@ -28,6 +29,7 @@ interface StoredUser extends UserCredentials {
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
+  isLoading: boolean
   login: (credentials: UserCredentials) => Promise<boolean>
   logout: () => void
   register: (data: RegisterData) => Promise<boolean>
@@ -42,13 +44,15 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Carrega usuário do sessionStorage ao montar
+  // Carrega usuário do cookie ao montar
   useEffect(() => {
-    const savedUser = lerLocalStorage<User | null>(STORAGE_KEYS.user, null)
+    const savedUser = getCookieObject<User>('auth_user')
     if (savedUser) {
       setUser(savedUser)
     }
+    setIsLoading(false)
   }, [])
 
   /**
@@ -66,6 +70,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password: DEFAULT_USER.password,
         email: 'pucminas@example.com',
         name: 'Usuário PUC Minas',
+        createdAt: new Date().toISOString(),
+      })
+      salvarLocalStorage(STORAGE_KEYS.users, users)
+    }
+
+    // Adiciona usuário de teste se não existir
+    const hasTestUser = users.some(u => u.email === 'teste@email.com')
+    if (!hasTestUser) {
+      users.push({
+        id: 'test-user',
+        username: 'teste',
+        password: '123456',
+        email: 'teste@email.com',
+        name: 'Usuário Teste',
         createdAt: new Date().toISOString(),
       })
       salvarLocalStorage(STORAGE_KEYS.users, users)
@@ -89,8 +107,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Simula delay de rede
       setTimeout(() => {
         const users = getUsers()
+        // Aceita login por username OU email
         const foundUser = users.find(
-          u => u.username === credentials.username && u.password === credentials.password
+          u => (u.username === credentials.username || u.email === credentials.username) && u.password === credentials.password
         )
 
         if (foundUser) {
@@ -103,7 +122,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
           }
 
           setUser(userData)
-          salvarLocalStorage(STORAGE_KEYS.user, userData)
+          // Salva no cookie com duração de 7 dias
+          setCookieObject('auth_user', userData, { days: 7 })
           resolve(true)
         } else {
           resolve(false)
@@ -117,7 +137,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
    */
   const logout = () => {
     setUser(null)
-    removerLocalStorage(STORAGE_KEYS.user)
+    removeCookie('auth_user')
   }
 
   /**
@@ -188,6 +208,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         user,
         isAuthenticated: !!user,
+        isLoading,
         login,
         logout,
         register,

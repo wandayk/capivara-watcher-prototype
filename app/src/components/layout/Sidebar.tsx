@@ -57,7 +57,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           x: isOpen ? 0 : -320,
         }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="fixed left-0 top-0 h-screen w-80 bg-white border-r border-light-border flex flex-col z-50 md:relative md:translate-x-0"
+        className="fixed left-0 top-0 h-screen w-70 bg-white flex flex-col z-50 md:relative md:translate-x-0"
       >
         {/* Close button (mobile only) */}
         <button
@@ -72,15 +72,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Add Button */}
         <div className="p-4">
-          <Button
-            variant="primary"
-            size="md"
-            fullWidth
+          <button
             onClick={handleAddClick}
+            className="w-full h-10 text-sm shadow-md font-semibold transition-all bg-green-600/70 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-green-600/80"
           >
-            <Plus className="w-5 h-5" />
             Adicionar Parlamentar
-          </Button>
+          </button>
         </div>
 
         {/* Parlamentares List */}
@@ -109,12 +106,26 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                       w-full p-3 rounded-lg text-left transition-all
                       ${
                         isSelected
-                          ? "bg-brazil-green/10 border-2 border-brazil-green"
-                          : "bg-gray-50 border-2 border-transparent hover:border-gray-200"
+                          ? "bg-brazil-green/20 border-2 border-brazil-green shadow-md ring-2 ring-brazil-green/50"
+                          : "bg-muted border-2 border-transparent hover:border-border"
                       }
                     `}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: isSelected ? 1 : 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    animate={
+                      isSelected
+                        ? {
+                            boxShadow: [
+                              "0 0 0 0 rgba(0, 155, 58, 0)",
+                              "0 0 0 4px rgba(0, 155, 58, 0.1)",
+                              "0 0 0 0 rgba(0, 155, 58, 0)",
+                            ],
+                          }
+                        : {}
+                    }
+                    transition={
+                      isSelected ? { duration: 2, repeat: Infinity } : {}
+                    }
                   >
                     <div className="flex items-center gap-3">
                       <Avatar

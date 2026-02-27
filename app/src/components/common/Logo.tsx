@@ -1,30 +1,34 @@
-import { Building2 } from 'lucide-react'
-
 interface LogoProps {
-  size?: 'sm' | 'md' | 'lg'
-  showText?: boolean
+  size?: "sm" | "md" | "lg";
+  showText?: boolean;
 }
 
-export function Logo({ size = 'md', showText = true }: LogoProps) {
+export function Logo({ size = "md", showText = true }: LogoProps) {
   const sizes = {
-    sm: { icon: 'w-6 h-6', text: 'text-lg' },
-    md: { icon: 'w-8 h-8', text: 'text-2xl' },
-    lg: { icon: 'w-12 h-12', text: 'text-4xl' },
-  }
+    sm: { icon: "w-6 h-6", text: "text-sm", container: "gap-2" },
+    md: { icon: "w-15 h-15", text: "text-2xl", container: "gap-3" },
+    lg: { icon: "w-12 h-12", text: "text-3xl", container: "gap-4" },
+  };
 
-  const sizeClasses = sizes[size]
+  const sizeClasses = sizes[size];
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="relative">
-        <Building2 className={`${sizeClasses.icon} text-brazil-green`} />
-        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-brazil-yellow rounded-full" />
-      </div>
+    <div className={`flex items-center ${sizeClasses.container}`}>
+      <img
+        src="/capivara.svg"
+        alt="Capivara Watcher Logo"
+        className={sizeClasses.icon}
+      />
       {showText && (
-        <span className={`${sizeClasses.text} font-display font-bold text-brazil-green`}>
-          ParlaTrack
-        </span>
+        <div className="flex flex-col">
+          <span className={`${sizeClasses.text} font-display font-bold`}>
+            CAPIVARA
+          </span>
+          <span className={`${sizeClasses.text} font-display font-bold`}>
+            WATCHER
+          </span>
+        </div>
       )}
     </div>
-  )
+  );
 }

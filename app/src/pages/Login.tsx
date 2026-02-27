@@ -34,26 +34,28 @@ export function Login() {
       const success = await login({ username: email, password });
 
       if (success) {
-        navigate(`${ROUTES.redirecting}?to=${ROUTES.home}`);
+        navigate(ROUTES.home, { replace: true });
       } else {
         setError("Credenciais inválidas");
+        setIsLoading(false);
       }
     } catch {
       setError("Erro ao fazer login. Tente novamente.");
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex bg-background relative">
-      {/* Animated Background Gradients */}
-      <div className="absolute inset-0 -z-10" />
-      <div className="absolute top-0 left-1/4 w-[500px] h-full bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
-      <div
-        className="absolute flex items-center bottom-0 right-1/4 w-[500px] h-full bg-primary/15 rounded-full blur-[120px] -z-10 animate-pulse"
-        style={{ animationDelay: "1s" }}
-      />
+    <>
+
+      <div className="h-screen w-screen overflow-hidden flex bg-background relative">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 -z-10" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-full bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
+        <div
+          className="absolute flex items-center bottom-0 right-1/4 w-[500px] h-full bg-primary/15 rounded-full blur-[120px] -z-10 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
       {/* Left Side - Video */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
@@ -233,5 +235,6 @@ export function Login() {
         </motion.div>
       </div>
     </div>
+    </>
   );
 }

@@ -7,7 +7,6 @@ import { ProtectedRoute } from './components/common/ProtectedRoute'
 import { Login } from './pages/Login'
 import { CreateAccount } from './pages/CreateAccount'
 import { ChangePassword } from './pages/ChangePassword'
-import { Redirecting } from './pages/Redirecting'
 import { Home } from './pages/Home'
 import { AddParlamentar } from './pages/AddParlamentar'
 
@@ -25,7 +24,6 @@ function App() {
         <Route path={ROUTES.login} element={<Login />} />
         <Route path={ROUTES.createAccount} element={<CreateAccount />} />
         <Route path={ROUTES.changePassword} element={<ChangePassword />} />
-        <Route path={ROUTES.redirecting} element={<Redirecting />} />
 
         {/* Protected Routes */}
         <Route

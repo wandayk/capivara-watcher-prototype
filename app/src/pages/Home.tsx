@@ -1,22 +1,22 @@
-import { MainLayout } from '../components/layout/MainLayout'
-import { EmptyState } from '../components/parlamentar/EmptyState'
-import { ParlamentarDetail } from '../components/parlamentar/ParlamentarDetail'
-import { useParlamentares } from '../hooks/useParlamentares'
+import { MainLayout } from "../components/layout/MainLayout";
+import { ProjectInfo } from "../components/parlamentar/ProjectInfo";
+import { ParlamentarDetail } from "../components/parlamentar/ParlamentarDetail";
+import { useParlamentares } from "../hooks/useParlamentares";
 
 export function Home() {
-  const { selectedParlamentar } = useParlamentares()
+  const { selectedParlamentar } = useParlamentares();
 
   return (
     <MainLayout>
-      <div className="p-4 md:p-8">
+      <div className="py-6 px-30">
         <div className="max-w-6xl mx-auto">
           {selectedParlamentar ? (
             <ParlamentarDetail parlamentar={selectedParlamentar} />
           ) : (
-            <EmptyState />
+            <ProjectInfo />
           )}
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

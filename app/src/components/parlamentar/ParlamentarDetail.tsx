@@ -45,7 +45,7 @@ export function ParlamentarDetail({ parlamentar }: ParlamentarDetailProps) {
       className="space-y-6"
     >
       {/* Hero Section */}
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} id="hero">
         <Card padding="lg">
           <div className="flex flex-col md:flex-row gap-6">
             {/* Avatar */}
@@ -103,7 +103,7 @@ export function ParlamentarDetail({ parlamentar }: ParlamentarDetailProps) {
 
       {/* Contact Info */}
       {(parlamentar.email || parlamentar.telefone) && (
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} id="contato">
           <Card padding="lg">
             <h2 className="text-xl font-display text-light-text dark:text-dark-text mb-4">
               Contato
@@ -145,7 +145,7 @@ export function ParlamentarDetail({ parlamentar }: ParlamentarDetailProps) {
       )}
 
       {/* Personal Data */}
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} id="dados-pessoais">
         <Card padding="lg">
           <h2 className="text-xl font-display text-light-text dark:text-dark-text mb-4">
             Dados Pessoais
@@ -200,7 +200,7 @@ export function ParlamentarDetail({ parlamentar }: ParlamentarDetailProps) {
 
       {/* Mandate Info */}
       {(parlamentar.situacao || parlamentar.condicaoEleitoral) && (
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} id="mandato">
           <Card padding="lg">
             <h2 className="text-xl font-display text-light-text dark:text-dark-text mb-4 flex items-center gap-2">
               <Building className="w-6 h-6" />
@@ -233,7 +233,7 @@ export function ParlamentarDetail({ parlamentar }: ParlamentarDetailProps) {
 
       {/* External Links */}
       {parlamentar.url && (
-        <motion.div variants={itemVariants}>
+        <motion.div variants={itemVariants} id="links">
           <Card padding="lg">
             <h2 className="text-xl font-display text-light-text dark:text-dark-text mb-4">
               Links Externos

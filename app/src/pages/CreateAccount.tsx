@@ -67,14 +67,14 @@ export function CreateAccount() {
       if (success) {
         setSuccess(true);
         setTimeout(() => {
-          navigate(`${ROUTES.redirecting}?to=${ROUTES.login}`);
+          navigate(ROUTES.login, { replace: true });
         }, 2000);
       } else {
         setErrors({ general: "Email já cadastrado" });
+        setIsLoading(false);
       }
     } catch {
       setErrors({ general: "Erro ao criar conta. Tente novamente." });
-    } finally {
       setIsLoading(false);
     }
   };
@@ -111,14 +111,15 @@ export function CreateAccount() {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex bg-background relative">
-      {/* Animated Background Gradients */}
-      <div className="absolute inset-0 -z-10" />
-      <div className="absolute top-0 left-1/4 w-[500px] h-full bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
-      <div
-        className="absolute flex items-center bottom-0 right-1/4 w-[500px] h-full bg-primary/15 rounded-full blur-[120px] -z-10 animate-pulse"
-        style={{ animationDelay: "1s" }}
-      />
+    <>
+      <div className="h-screen w-screen overflow-hidden flex bg-background relative">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 -z-10" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-full bg-primary/20 rounded-full blur-[120px] -z-10 animate-pulse" />
+        <div
+          className="absolute flex items-center bottom-0 right-1/4 w-[500px] h-full bg-primary/15 rounded-full blur-[120px] -z-10 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
 
       {/* Left Side - Video */}
       <motion.div
@@ -313,5 +314,6 @@ export function CreateAccount() {
         </motion.div>
       </div>
     </div>
+    </>
   );
 }
