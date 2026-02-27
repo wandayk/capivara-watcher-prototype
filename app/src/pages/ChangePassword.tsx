@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import beachVideo from "/beach.mp4";
 
 export function ChangePassword() {
   const navigate = useNavigate();
@@ -145,7 +144,7 @@ export function ChangePassword() {
               console.log("Vídeo carregado com sucesso");
             }}
           >
-            <source src={beachVideo} type="video/mp4" />
+            <source src={`${import.meta.env.BASE_URL}beach.mp4`} type="video/mp4" />
           </video>
         )}
 
