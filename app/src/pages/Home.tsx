@@ -8,7 +8,7 @@ export function Home() {
 
   return (
     <MainLayout>
-      <div className="py-6 px-30">
+      <div className="py-14 px-30">
         <div className="max-w-6xl mx-auto">
           {selectedParlamentar ? (
             <ParlamentarDetail parlamentar={selectedParlamentar} />

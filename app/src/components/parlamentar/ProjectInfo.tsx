@@ -183,19 +183,21 @@ export function ProjectInfo() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-start gap-3 p-4 bg-muted rounded-lg"
+                className="flex items-start gap-3 bg-muted rounded-lg"
               >
-                <div className="flex-shrink-0 mt-1">
-                  <CheckCircle className="w-5 h-5 text-brazil-green" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">
-                    {objective.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {objective.description}
-                  </p>
-                </div>
+                <Card>
+                  <div className="flex-shrink-0 mt-1">
+                    <CheckCircle className="w-5 h-5 text-brazil-green" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">
+                      {objective.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {objective.description}
+                    </p>
+                  </div>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -270,15 +272,17 @@ export function ProjectInfo() {
                 transition={{ delay: index * 0.15 }}
                 className="text-center"
               >
-                <div className="inline-flex p-4 bg-gradient-to-br from-brazil-green/20 to-brazil-blue/20 rounded-full mb-4">
-                  <point.icon className="w-8 h-8 text-brazil-green" />
-                </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                  {point.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {point.description}
-                </p>
+                <Card>
+                  <div className="inline-flex p-4 bg-gradient-to-br from-brazil-green/20 to-brazil-blue/20 rounded-full mb-4">
+                    <point.icon className="w-8 h-8 text-brazil-green" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                    {point.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {point.description}
+                  </p>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -300,11 +304,6 @@ export function ProjectInfo() {
                 transition={{ delay: index * 0.1 }}
                 className="flex gap-4"
               >
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-brazil-green text-white flex items-center justify-center font-bold">
-                    {index + 1}
-                  </div>
-                </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-foreground mb-2">
                     {step.title}
@@ -322,16 +321,6 @@ export function ProjectInfo() {
                 </div>
               </motion.div>
             ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <button
-              onClick={() => navigate(ROUTES.add)}
-              className="h-12 px-8 text-base shadow-md font-semibold bg-green-600/70 text-white rounded-lg hover:bg-green-600/80 transition-all inline-flex items-center gap-2"
-            >
-              <Plus className="w-5 h-5" />
-              Começar Agora
-            </button>
           </div>
         </div>
       </motion.section>
