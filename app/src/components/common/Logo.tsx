@@ -15,7 +15,7 @@ export function Logo({ size = "md", showText = true }: LogoProps) {
   return (
     <div className={`flex items-center ${sizeClasses.container}`}>
       <img
-        src="/capivara.svg"
+        src={`${import.meta.env.BASE_URL}capivara.svg`}
         alt="Capivara Watcher Logo"
         className={sizeClasses.icon}
       />

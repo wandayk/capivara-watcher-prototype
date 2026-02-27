@@ -51,7 +51,7 @@ export function LoadingTransition({
                 setVideoError(true);
               }}
             >
-              <source src="/loading.mp4" type="video/mp4" />
+              <source src={`${import.meta.env.BASE_URL}loading.mp4`} type="video/mp4" />
             </video>
           )}
 
