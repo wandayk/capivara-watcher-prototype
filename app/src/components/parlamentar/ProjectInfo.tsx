@@ -40,7 +40,6 @@ export function ProjectInfo() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
@@ -142,7 +141,7 @@ export function ProjectInfo() {
     >
       {/* Section 1: Sobre o Projeto */}
       <motion.section variants={itemVariants} id="sobre">
-        <div padding="lg">
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-3xl font-display text-foreground">
               Sobre o Projeto
@@ -172,7 +171,7 @@ export function ProjectInfo() {
 
       {/* Section 2: Objetivos */}
       <motion.section variants={itemVariants} id="objetivos">
-        <div padding="lg">
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-3xl font-display text-foreground">Objetivos</h2>
           </div>
@@ -206,7 +205,7 @@ export function ProjectInfo() {
 
       {/* Section 3: Fontes de Dados */}
       <motion.section variants={itemVariants} id="fontes">
-        <div padding="lg">
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-3xl font-display text-foreground">
               Fontes de Dados
@@ -222,7 +221,7 @@ export function ProjectInfo() {
               {dataSources.map((source, index) => (
                 <Card
                   key={index}
-                  padding="md"
+                 
                   hover
                   className="border-2 border-transparent hover:border-brazil-green"
                 >
@@ -257,7 +256,7 @@ export function ProjectInfo() {
 
       {/* Section 4: Importância do Acompanhamento */}
       <motion.section variants={itemVariants} id="importancia">
-        <div padding="lg">
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-3xl font-display text-foreground">
               Importância do Acompanhamento
@@ -291,7 +290,7 @@ export function ProjectInfo() {
 
       {/* Section 5: Como Usar */}
       <motion.section variants={itemVariants} id="como-usar">
-        <div padding="lg">
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <h2 className="text-3xl font-display text-foreground">Como Usar</h2>
           </div>

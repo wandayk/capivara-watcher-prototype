@@ -81,8 +81,8 @@ export function AddParlamentar() {
 
     const handleStateClick = (event: Event) => {
       event.preventDefault();
-      const target = event.currentTarget as Element;
-      const name = target.getAttribute("name");
+      const target = event.currentTarget as HTMLElement;
+      const name = target.dataset.name;
 
       if (name && stateNameToUF[name]) {
         const uf = stateNameToUF[name];
@@ -106,9 +106,9 @@ export function AddParlamentar() {
     };
 
     const handleStateMouseEnter = (event: Event) => {
-      const target = event.currentTarget as Element;
-      const name = target.getAttribute("name");
-      const code = target.getAttribute("code");
+      const target = event.currentTarget as HTMLElement;
+      const name = target.dataset.name;
+      const code = target.dataset.code;
       if (name && code && stateNameToUF[name]) {
         const uf = stateNameToUF[name];
 
@@ -169,8 +169,9 @@ export function AddParlamentar() {
 
       if (stateName) {
         for (let i = 0; i < allStates.length; i++) {
-          if (allStates[i].getAttribute("name") === stateName) {
-            allStates[i].classList.add("selected");
+          const element = allStates[i] as HTMLElement;
+          if (element.dataset.name === stateName) {
+            element.classList.add("selected");
             break;
           }
         }
@@ -297,24 +298,24 @@ export function AddParlamentar() {
               version="1.1"
               id="svg-map"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 450 460"
-              enable-background="new 0 0 450 460"
-              xml:space="preserve"
+              enableBackground="new 0 0 450 460"
+              xmlSpace="preserve"
               className="w-full h-auto max-h-full"
             >
               <g>
                 <a
-                  xlink:href="#tocantins"
-                  class="estado"
-                  name="Tocantins"
-                  code="17"
+                  href="#tocantins"
+                  className="estado"
+                  data-name="Tocantins"
+                  data-code="17"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M289.558,235.641
         c16.104,0.575,44.973-31.647,44.835-45.259c-0.136-13.612-17.227-58.446-22.349-66.088c-5.122-7.628-37.905,2.506-37.905,2.506
         S234.852,233.695,289.558,235.641z"
@@ -326,12 +327,12 @@ export function AddParlamentar() {
                     TO
                   </text>
                 </a>
-                <a xlink:href="#bahia" class="estado" name="Bahia" code="29">
+                <a href="#bahia" className="estado" data-name="Bahia" data-code="29">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M313.276,197.775
         c2.084-2.739,3.506-7.012,6.464-8.764c1.641-0.973,3.232-4.684,4.271-5.163c2.304-1.014,12.161-25.143,20.706-22.513
         c1.095,0.342,29.881,3.478,32.153,7.532c2.246-0.506,17.582-8.804,25.829-4.999c9.172,4.246,11.225,20.679,11.2,20.843
@@ -349,23 +350,23 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#sergipe"
-                  class="estado"
-                  name="Sergipe"
-                  code="28"
+                  href="#sergipe"
+                  className="estado"
+                  data-name="Sergipe"
+                  data-code="28"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M408.561,191.735
         c0.521-1.505,2.465-0.725,3.533-0.794c2.273-0.164,0.494-2.738,1.095-3.778c2.026-3.793-2.738-5.999-1.998-10.408
         c4.024,1.931,9.448,3.397,12.408,6.89c1.343,1.533,5.504,2.656,5.832,4.847c-6.822,0.384-6.901,8.819-11.942,11.572
         C413.545,202.212,407.055,193.721,408.561,191.735z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M417.324,182.854c6.214,0,11.266,5.035,11.266,11.262c0,6.208-5.052,11.261-11.266,11.261
         c-6.238,0-11.258-5.053-11.258-11.261C406.063,187.89,411.084,182.854,417.324,182.854z"
                   ></path>
@@ -377,16 +378,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#pernambuco"
-                  class="estado"
-                  name="Pernambuco"
-                  code="26"
+                  href="#pernambuco"
+                  className="estado"
+                  data-name="Pernambuco"
+                  data-code="26"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M373.011,167.238
         c2.709-0.795,6.218-14.106,8.325-15.106c4.136-1.986,17.255-1.437,17.8,4.903c-0.437-0.068,8.189-2.273,7.479-1.466
         c1.7-0.711,10.518-4.723,12.599-4.82c0.274-0.013,4.603,0.905,3.068,2.315c-0.464,0.439,4.219,3.698,10.789,3.45
@@ -403,23 +404,23 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#alagoas"
-                  class="estado"
-                  name="Alagoas"
-                  code="27"
+                  href="#alagoas"
+                  className="estado"
+                  data-name="Alagoas"
+                  data-code="27"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M413.953,169.018
         c3.78,3.313,9.424,5.505,12.547,5.491c3.229-0.013,5.009-3.328,7.421-4.794c1.177-0.712,10.297-1.93,9.174,1.042
         c-1.807,4.848-7.122,8.585-10.024,12.789c-2.792,2-3.423,7.093-6.354,1.864c-3.259,0.424-3.722-4.424-6.957-4.477
         c-3.668-2.261-7.998-3.769-11.201-6.342C410.615,172.646,412.751,171.359,413.953,169.018z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M436.423,168.763c6.236,0,11.258,5.054,11.258,11.278c0,6.207-5.02,11.259-11.258,11.259
         c-6.241,0-11.263-5.052-11.263-11.259C425.16,173.816,430.182,168.763,436.423,168.763z"
                   ></path>
@@ -431,23 +432,23 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#riograndedonorte"
-                  class="estado"
-                  name="Rio Grande do Norte"
-                  code="24"
+                  href="#riograndedonorte"
+                  className="estado"
+                  data-name="Rio Grande do Norte"
+                  data-code="24"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M404.698,138.795
         c2.383-4.027,6.574-6.123,8.49-11.149c1.973-5.107,3.834-5.818,8.764-4.642c5.041,1.207,9.339,0.837,14.57,1.671
         c7.534,1.193,6.848,10.968,9.206,16.516c-1.919,1.096-13.972,0.521-15.064-1.657c-1.041-2.067-2.904,7.107-5.094,7.3
         c1.532-5.847-12.654,1.78-5.424-8.683c2.545-3.67-6.302-0.808-6.711,0.725C410.121,144.013,407.217,139.151,404.698,138.795z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M430.827,107.798c6.241,0,11.261,5.039,11.261,11.261c0,6.224-5.02,11.261-11.261,11.261
         c-6.209,0-11.26-5.037-11.26-11.261C419.567,112.837,424.618,107.798,430.827,107.798z"
                   ></path>
@@ -458,12 +459,12 @@ export function AddParlamentar() {
                     RN
                   </text>
                 </a>
-                <a xlink:href="#ceara" class="estado" name="Ceará" code="23">
+                <a href="#ceara" className="estado" data-name="Ceará" data-code="23">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M372.379,104.409
         c0.437-1.368,2.961-3.627,1.043-5.025c12.106-1.328,17.581-0.849,27.66,6.723c4.026,3.054,6.822,5.574,10.571,9.147
         c1.317,1.273,7.614,4.313,7.914,6.164c-0.054-0.316-5.396,3.696-5.997,5.217c-1.066,2.684-2.659,6.093-4.3,8.298
@@ -479,12 +480,12 @@ export function AddParlamentar() {
                     CE
                   </text>
                 </a>
-                <a xlink:href="#piaui" class="estado" name="Piauí" code="22">
+                <a href="#piaui" className="estado" data-name="Piauí" data-code="22">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M320.781,185.478
         c2.465-5.149-7.505-20.801-7.505-20.801s47.354-65.868,54.285-66.841c0.299-0.042,6.243,1.768,6.463,2.219
         c0.438,0.863-0.821,5.244-0.685,6.587c0.275,2.629,2.879,6.587,2.328,8.684c-1.15,4.736-1.863,6.134,1.369,9.901
@@ -501,16 +502,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#maranhao"
-                  class="estado"
-                  name="Maranhão"
-                  code="21"
+                  href="#maranhao"
+                  className="estado"
+                  data-name="Maranhão"
+                  data-code="21"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M288.845,127.827
         c4.108-2.726,31.195-48.985,31.386-50.395c1.235,0.397,6.084,7.435,7.562,5.025c0.493,0.013-0.328,2.15-0.547,2.396
         c-0.054-0.135,2.189-2.286,2.52-2.436c0.521-0.233,1.948,1.903,3.451-0.726c5.642,1.575,1.314,14.31,9.121,11.694
@@ -531,12 +532,12 @@ export function AddParlamentar() {
                     MA
                   </text>
                 </a>
-                <a xlink:href="#amapa" class="estado" name="Amapá" code="16">
+                <a href="#amapa" className="estado" data-name="Amapá" data-code="16">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M225.198,39.089
         c3.274,1.165,3.985-1.315,6.572-1.74c3.616-0.603,5.683,2.725,9.037,2.067c4.055-0.78,7.093-8.025,7.314-11.598
         c4.492-3.534,5.503-11.258,9.42-14.68c6.055,4.258,6.11,15.788,7.589,22.485c-0.164,0.083,6.57,7.998,7.944,8.682
@@ -550,12 +551,12 @@ export function AddParlamentar() {
                     AP
                   </text>
                 </a>
-                <a xlink:href="#para" class="estado" name="Pará" code="15">
+                <a href="#para" className="estado" data-name="Pará" data-code="15">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M173.378,50.619
         c2.259,2.63,5.629-4.478,7.901-3.82c3.19,0.918,1.478-1.108,5.026-1.752c1.931,0.806,3.096,0.273,3.519-1.631
         c0.535-1.26,1.453-1.726,2.725-1.384c1.768-1.684,13.558,3.603,14.68,0.384c0.629-1.821-4.287-5.709-0.302-6.997
@@ -579,16 +580,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#roraima"
-                  class="estado"
-                  name="Roraima"
-                  code="14"
+                  href="#roraima"
+                  className="estado"
+                  data-name="Roraima"
+                  data-code="14"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M113.18,24.107
         c-0.972-2.753-7.861-5.889-6.999-8.984c0.068-0.232,13.229,6.053,12.79,2.808c0.398,1.329,1.219,1.889,2.439,1.685
         c1.889-1.301,7.148,4.204,8.216,1.889c0.438-0.959-1.657-3.753,0.74-3.848c1.026,0.438,1.534,0.164,1.52-0.822
@@ -606,16 +607,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#amazonas"
-                  class="estado"
-                  name="Amazonas"
-                  code="13"
+                  href="#amazonas"
+                  className="estado"
+                  data-name="Amazonas"
+                  data-code="13"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M10.078,136.412
         c1.15-4.972,4.258-10.394,8.215-13.105c4.41-3.027,7.656-5.71,13.105-6.082c2.165-0.149,10.216-5.75,11.983-2.984
         c3.711,5.765,4.998-3.739,5.574-7.025c1.726-9.667,3.697-19.322,4.86-29.086c-0.342-1.356-2.013-6.231-2.833-7.163
@@ -641,12 +642,12 @@ export function AddParlamentar() {
                     AM
                   </text>
                 </a>
-                <a xlink:href="#acre" class="estado" name="Acre" code="12">
+                <a href="#acre" className="estado" data-name="Acre" data-code="12">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.656,148.545
         c12.557,7.544,27.524,8.367,41.082,13.2c12.802,8.065,27.278,12.845,40.616,19.872c-2.834,1.205-7.587,4.382-9.983,6.395
         c-2.93,2.45-1.3,2.04-4.628,1.957c-2.93-0.069-3.957,4.615-7.203,5.259c-2.999,0.603-7.161-1.958-10.995-1.697
@@ -662,16 +663,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#rondonia"
-                  class="estado"
-                  name="Rondônia"
-                  code="11"
+                  href="#rondonia"
+                  className="estado"
+                  data-name="Rondônia"
+                  data-code="11"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M83.34,180.232
         c0.931-1.574,5.341-4.668,6.312-4.656c1.355-0.067,2.671,0.138,3.958,0.603c3.012,1.44,2.039-1.135,5.341-0.123
         c-1.274-2.287,3.793-2.943,2.86-0.315c3.068,0.247,2.725-4.683,6.668-5.12c4.438-0.508,5.054-0.646,7.122-4.534
@@ -690,16 +691,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#matogrosso"
-                  class="estado"
-                  name="Mato Grosso"
-                  code="51"
+                  href="#matogrosso"
+                  className="estado"
+                  data-name="Mato Grosso"
+                  data-code="51"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M142.237,173.962
         c4-0.316-1.888-6.452,5-5.738c7.914,0.808,16.295,0.328,24.279,0.218c1.629-0.013,8.902,1.288,7.395-1.833
         c-1.192-2.453,1.821-6.425,0.425-9.725c2.027-0.864,1.289-3.807,2.629-5.107c1.151-1.123,4.176,7.244,4.436,7.819
@@ -721,16 +722,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#mattogrossodosul"
-                  class="estado"
-                  name="Mato Grosso do Sul"
-                  code="50"
+                  href="#mattogrossodosul"
+                  className="estado"
+                  data-name="Mato Grosso do Sul"
+                  data-code="50"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M183.198,294.536
         c2.136-4.464,3.177-9.394,5.312-13.61c1.712-3.344-4.067-7.587-2.423-9.807c0.027-0.026,2.738,3.641,3.917,3.725
         c3.204-1.534,4.807-2.272,6.984-5.228c2.615-3.59,10.832-3.014,14.051-0.305c1.259,1.041,3.068,2.107,4.668,2.574
@@ -748,12 +749,12 @@ export function AddParlamentar() {
                     MS
                   </text>
                 </a>
-                <a xlink:href="#goias" class="estado" name="Goiás" code="52">
+                <a href="#goias" className="estado" data-name="Goiás" data-code="52">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M237.768,270.519
         c0.628-2.904,1.835-7.396,4.709-8.766c1.015-1.644,1.754-5.147,2.275-5.586c2.408-2.247,3.889-3.783,6.63-4.656
         c3.723-1.205,3.338-5.342,4.846-8.165c1.504-2.845,4.736-1.15,5.942-3.382c1.479-2.834,0.741-6.161,2.189-8.874
@@ -775,12 +776,12 @@ export function AddParlamentar() {
                     GO
                   </text>
                 </a>
-                <a xlink:href="#parana" class="estado" name="Paraná" code="41">
+                <a href="#parana" className="estado" data-name="Paraná" data-code="41">
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M222.225,363.694
         c1.807-2.138,1.889-4.881,2.424-7.479c0.301-1.453,0.465-7.86,1.369-8.736c2.3-0.684,2.3-3.315,2.726-5.204
         c0.616-2.738,2.821-2.958,3.984-5.616c4.369-9.91,38.947-9.529,46.476-9.227c4.658,0.193,15.775,34.563,17.916,33.794
@@ -795,16 +796,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#santacatarina"
-                  class="estado"
-                  name="Santa Catarina"
-                  code="42"
+                  href="#santacatarina"
+                  className="estado"
+                  data-name="Santa Catarina"
+                  data-code="42"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M231.029,383.959
         c1.669-3.338-0.284-10.516,4.573-10.569c6.631-0.109,13.639,3.559,20.402,3.888c1.317,0.055,5.231,2.163,4.357-1.15
         c-1.095-4.164,3.945-1.863,5.67-3.179c2.274-1.724,8.187-4.106,11.311-1.367c1.423,1.809,20.05-5.395,13.284,3.946
@@ -819,16 +820,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#riograndedosul"
-                  class="estado"
-                  name="Rio Grande do Sul"
-                  code="43"
+                  href="#riograndedosul"
+                  className="estado"
+                  data-name="Rio Grande do Sul"
+                  data-code="43"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M191.236,416.881
         c0.52-2.684,7.38-8.409,9.477-10.351c0.37-0.359,8.599-10.08,9.174-8.329c-1.301-3.89,2.781-1.589,3.917-4.819
         c0.26-0.521,7.04-4.821,7.109-4.795c1.436-0.191,6.721-3.695,7.421-3.257c1.204-2.028,8.927-1.479,8.653-0.824
@@ -846,16 +847,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#saopaulo"
-                  class="estado"
-                  name="São Paulo"
-                  code="35"
+                  href="#saopaulo"
+                  className="estado"
+                  data-name="São Paulo"
+                  data-code="35"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M239.3,330.554
         c3.26-4.356,9.56-5.039,11.531-10.792c1.369-3.942,3.889-8.818,6.135-13.036c1.561-2.957,7.749-7.121,10.517-8.65
         c0.383-0.196,32.974-6.138,42.234-1.701c20.265,9.724,26.017,33.879,27.854,33.304c4.408-1.425,5.34,3.778,2.106,4.49
@@ -874,16 +875,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#minasgerais"
-                  class="estado"
-                  name="Minas Gerais"
-                  code="31"
+                  href="#minasgerais"
+                  className="estado"
+                  data-name="Minas Gerais"
+                  data-code="31"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M262.881,297.305
         c-1.696-5.094,15.531-19.882,18.844-13.421c5.531-7.367,15.886,1.588,19.773-3.944c0.988-1.367,3.015-1.453,3.725-2.957
         c0.326-0.711-0.493-2.793-0.056-3.888c1.369-3.398-4.873-2.355-0.109-6.603c4.547-4.053-1.917-4.739-1.204-8.186
@@ -909,16 +910,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#riodejaneiro"
-                  class="estado"
-                  name="Rio de Janeiro"
-                  code="33"
+                  href="#riodejaneiro"
+                  className="estado"
+                  data-name="Rio de Janeiro"
+                  data-code="33"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M332.886,337.429
         c-1.26-2.768,8.409-4.795,7.89-6.71c-3.177-1.864-4.602,1.148-6.63-2.959c4.274-0.686,9.533-4.49,13.831-3.562
         c0.548-0.219,4.902-1.753,4.96,0.167c2.546-1.566,5.479-2.412,8.105-3.837c2.246-1.206,0.932-8.218,3.725-9.643
@@ -929,7 +930,7 @@ export function AddParlamentar() {
         C336.717,337.908,333.927,342.41,332.886,337.429z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M355.094,318.613c6.209,0,11.263,5.021,11.263,11.259c0,6.208-5.056,11.264-11.263,11.264
         c-6.211,0-11.263-5.054-11.263-11.264C343.831,323.634,348.883,318.613,355.094,318.613z"
                   ></path>
@@ -941,16 +942,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#espiritosanto"
-                  class="estado"
-                  name="Espírito Santo"
-                  code="32"
+                  href="#espiritosanto"
+                  className="estado"
+                  data-name="Espírito Santo"
+                  data-code="32"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M367.119,308.834
         c1.044-1.999-0.298-5.451,1.841-6.326c3.697-1.453,3.858-0.467,5.941-4.49c0.767-1.563,3.999-5.807,2.848-7.835
         c-0.439-0.765-3.204-3.613-3.286-4.05c1.04-0.249,2.079-0.219,3.123,0.054c1.366-0.654-6.465-10.519,2.137-8.054
@@ -959,7 +960,7 @@ export function AddParlamentar() {
         c-1.64-0.274-3.202-0.768-4.736-1.451C368.819,311.297,369.424,309.055,367.119,308.834z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M381.917,284.723c6.21,0,11.261,5.055,11.261,11.262c0,6.212-5.051,11.261-11.261,11.261
         c-6.212,0-11.263-5.049-11.263-11.261C370.654,289.777,375.705,284.723,381.917,284.723z"
                   ></path>
@@ -971,22 +972,22 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#distritofederal"
-                  class="estado"
-                  name="Distrito Federal"
-                  code="53"
+                  href="#distritofederal"
+                  className="estado"
+                  data-name="Distrito Federal"
+                  data-code="53"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M292.461,246.197
         c0,0,12.929-2.903,14.188,0c1.233,2.903,0.659,10.683-1.424,11.504c-2.08,0.849-14.296-1.806-14.023-3.313
         C291.503,252.853,292.461,246.197,292.461,246.197z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M300.735,238.34c6.212,0,11.26,5.035,11.26,11.258c0,6.21-5.048,11.263-11.26,11.263
         c-6.209,0-11.261-5.053-11.261-11.263C289.475,243.377,294.523,238.34,300.735,238.34z"
                   ></path>
@@ -998,16 +999,16 @@ export function AddParlamentar() {
                   </text>
                 </a>
                 <a
-                  xlink:href="#paraiba"
-                  class="estado"
-                  name="Paraíba"
-                  code="25"
+                  href="#paraiba"
+                  className="estado"
+                  data-name="Paraíba"
+                  data-code="25"
                 >
                   <path
                     stroke="#FFFFFF"
-                    stroke-width="1.0404"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.0404"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M401.575,141.096
         c2.081-3.081,16.791-6.82,19.117-4.616c0,1.918,7.259,1.686,10.133,2.712c-0.492,3.038,12.652,1.533,14.408,2.259
         c1.421,0.589,3.833,11.983,1.421,12.202c-0.874-1.124-2.083-1.739-3.586-1.835c-2.957-0.027-2.546,1.863-4.383,3.108
@@ -1016,7 +1017,7 @@ export function AddParlamentar() {
         C405.574,150.776,400.398,142.889,401.575,141.096z"
                   ></path>
                   <path
-                    class="circle"
+                    className="circle"
                     d="M433.797,133.597c6.237,0,11.26,5.051,11.26,11.261c0,6.226-5.022,11.262-11.26,11.262
         c-6.208,0-11.257-5.036-11.257-11.262C422.54,138.647,427.589,133.597,433.797,133.597z"
                   ></path>

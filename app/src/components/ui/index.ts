@@ -12,7 +12,7 @@ export { Skeleton } from './skeleton'
 export { Toaster } from './sonner'
 
 // Wrappers de compatibilidade
-export { AvatarWithImage } from './AvatarWithImage'
-export { CardWithPadding } from './CardWithPadding'
-export { ButtonCompat } from './ButtonCompat'
+export { Avatar as AvatarWithImage } from './AvatarWithImage'
+export { Card as CardWithPadding } from './CardWithPadding'
+export { Button as ButtonCompat } from './ButtonCompat'
 export { InputWithIcon } from './InputWithIcon'
