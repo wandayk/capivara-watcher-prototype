@@ -9,6 +9,14 @@
     <link rel="stylesheet" crossorigin href="/capivara-watcher-prototype/assets/index-DjXfZh2O.css">
   </head>
   <body>
+    <script>
+      // Handle redirect from 404.html
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect && redirect !== '/capivara-watcher-prototype' && redirect !== '/capivara-watcher-prototype/') {
+        sessionStorage.removeItem('redirect');
+        history.replaceState(null, '', redirect);
+      }
+    </script>
     <div id="root"></div>
   </body>
 </html>
