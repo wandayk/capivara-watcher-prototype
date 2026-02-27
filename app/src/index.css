@@ -4,7 +4,7 @@
 @theme {
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
-  
+
   --radius: 0.5rem;
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
@@ -66,9 +66,54 @@ input:autofill {
 
 /* Ocultar scrollbar mas manter funcionalidade */
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari e Chrome */
+  display: none; /* Safari e Chrome */
+}
+
+/* SVG Map Styles */
+#svg-map path {
+  fill: #0094d9;
+}
+
+#svg-map text {
+  fill: #fff;
+  font:
+    12px Arial-BoldMT,
+    sans-serif;
+  cursor: pointer;
+}
+
+#svg-map a {
+  text-decoration: none;
+}
+
+#svg-map a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#svg-map a:hover path {
+  fill: #003399 !important;
+}
+
+#svg-map a.selected path {
+  fill: #009b3a !important;
+  stroke: #fedf00 !important;
+  stroke-width: 0.5 !important;
+}
+
+#svg-map .circle {
+  fill: #66ccff;
+}
+
+#svg-map a:hover .circle {
+  fill: #003399 !important;
+  cursor: pointer;
+}
+
+#svg-map a.selected .circle {
+  fill: #009b3a !important;
 }
