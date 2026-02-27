@@ -7,6 +7,14 @@
     <title>CAPIVARA WATCHER</title>
   </head>
   <body>
+    <script>
+      // Handle redirect from 404.html
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect && redirect !== '/capivara-watcher-prototype' && redirect !== '/capivara-watcher-prototype/') {
+        sessionStorage.removeItem('redirect');
+        history.replaceState(null, '', redirect);
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
