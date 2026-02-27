@@ -18,7 +18,7 @@ function LogoutHandler() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/capivara-watcher-prototype">
       <Routes>
         {/* Public Routes */}
         <Route path={ROUTES.login} element={<Login />} />
