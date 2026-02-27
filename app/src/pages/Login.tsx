@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import loginVideo from "/login.mp4";
 
 export function Login() {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ export function Login() {
               console.log("Vídeo carregado com sucesso");
             }}
           >
-            <source src="/login.mp4" type="video/mp4" />
+            <source src={loginVideo} type="video/mp4" />
           </video>
         )}
 

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import beachVideo from "/beach.mp4";
 
 export function CreateAccount() {
   const navigate = useNavigate();
@@ -147,7 +148,7 @@ export function CreateAccount() {
               console.log("Vídeo carregado com sucesso");
             }}
           >
-            <source src="/beach.mp4" type="video/mp4" />
+            <source src={beachVideo} type="video/mp4" />
           </video>
         )}
 
